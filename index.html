@@ -702,49 +702,6 @@ function goToPage(pageNum) {
 
     window.scrollTo(0, 0);
 }
-
-// 🔥 ЗАГРУЗКА + СОХРАНЕНИЕ
-function loadImage(event, pageNum) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-            const base64 = e.target.result;
-
-            const img = document.getElementById('img-' + pageNum);
-            const content = document.getElementById('content-' + pageNum);
-
-            img.src = base64;
-            img.style.display = 'block';
-            content.style.display = 'none';
-
-            // СОХРАНЯЕМ
-            localStorage.setItem('image-' + pageNum, base64);
-        };
-
-        reader.readAsDataURL(file);
-    }
-}
-
-// 🔥 ВОССТАНОВЛЕНИЕ ПОСЛЕ ПЕРЕЗАГРУЗКИ
-function loadSavedImages() {
-    for (let i = 1; i <= 7; i++) {
-        const saved = localStorage.getItem('image-' + i);
-
-        if (saved) {
-            const img = document.getElementById('img-' + i);
-            const content = document.getElementById('content-' + i);
-
-            img.src = saved;
-            img.style.display = 'block';
-            content.style.display = 'none';
-        }
-    }
-}
-
-// запуск при загрузке страницы
-window.onload = loadSavedImages;
     </script>
 </body>
 </html>
